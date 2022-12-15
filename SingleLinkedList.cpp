@@ -162,9 +162,8 @@ void List<T>::remove_at(int index)
 			previous = previous->pNext;
 		}
 		Node<T>* adress_to_delete = previous->pNext;
-		Node<T>* next_adress = adress_to_delete->pNext;
-		delete previous->pNext;
-		previous->pNext = next_adress;
+		previous->pNext = adress_to_delete->pNext;
+		delete adress_to_delete;
 		Size--;
 	}
 }
@@ -184,6 +183,7 @@ int main()
 	//lst.insert_at(777, 3);
 	lst.remove_at(2);
 	lst.remove_at(0);
+	lst.remove_at(55);
 
 	std::cout << "-----After manipulations-----" << std::endl;
 
