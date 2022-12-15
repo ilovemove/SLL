@@ -23,7 +23,7 @@ private:
 	public:
 		Node* pNext;
 		T data;
-		Node(T data=T(), Node* pNext = nullptr)
+		Node(T data = T(), Node* pNext = nullptr)
 		{
 			this->data = data;
 			this->pNext = pNext;
@@ -31,7 +31,7 @@ private:
 	};
 	int Size;
 	Node<T>* head;
-}; 
+};
 
 template<typename T>
 List<T>::List()
@@ -74,7 +74,7 @@ T& List<T>::operator[](const int index)
 	{
 		if (counter == index)
 		{
-			return current->data; 
+			return current->data;
 		}
 		current = current->pNext;
 		counter++;
@@ -86,10 +86,10 @@ void List<T>::pop_front()
 {
 	if (head != nullptr)
 	{
-	Node<T>* temp = head->pNext;
-	delete head;
-	Size--;
-	head = temp;
+		Node<T>* temp = head->pNext;
+		delete head;
+		Size--;
+		head = temp;
 	}
 }
 
@@ -131,7 +131,7 @@ void List<T>::insert_at(T data, int index)
 	{
 		push_back(data);
 	}
-	else 
+	else
 	{
 		Node<T>* previous = this->head;
 		for (int i = 0; i < index - 1; i++)
@@ -150,6 +150,10 @@ void List<T>::remove_at(int index)
 	{
 		pop_back();
 	}
+	else if (index == 0)
+	{
+		pop_front();
+	}
 	else
 	{
 		Node<T>* previous = this->head;
@@ -157,10 +161,10 @@ void List<T>::remove_at(int index)
 		{
 			previous = previous->pNext;
 		}
-		Node<T>* adress_to_delete = previous->pNext; 
-		Node<T>* next_adress = adress_to_delete->pNext; 
+		Node<T>* adress_to_delete = previous->pNext;
+		Node<T>* next_adress = adress_to_delete->pNext;
 		delete previous->pNext;
-		previous->pNext = next_adress;	
+		previous->pNext = next_adress;
 		Size--;
 	}
 }
@@ -170,16 +174,16 @@ int main()
 	List<int> lst;
 	for (int i = 0; i < 5; i++)
 	{
-		lst.push_back(rand()%100);
-		std::cout << lst[i]  << std::endl;
+		lst.push_back(rand() % 100);
+		std::cout << lst[i] << std::endl;
 	}
-	std::cout  << "size = " << lst.GetSize()<< std::endl;
+	std::cout << "size = " << lst.GetSize() << std::endl;
 
 	//lst.insert_at(444, 3);
 	//lst.insert_at(666, 14);
 	//lst.insert_at(777, 3);
 	lst.remove_at(2);
-	lst.remove_at(5);
+	lst.remove_at(0);
 
 	std::cout << "-----After manipulations-----" << std::endl;
 
@@ -187,6 +191,6 @@ int main()
 	{
 		std::cout << lst[i] << std::endl;
 	}
-	std::cout  << "size = " << lst.GetSize() << std::endl;
+	std::cout << "size = " << lst.GetSize() << std::endl;
 	return 0;
 }
